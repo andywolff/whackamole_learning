@@ -4,7 +4,7 @@ project(whackamole_learning)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs)
+find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs message_generation)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -19,12 +19,11 @@ find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs)
 ## Declare ROS messages and services ##
 #######################################
 
-## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+# Generate messages in the 'msg' folder
+ add_message_files(
+   FILES
+   TreeParams.msg
+ )
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -34,10 +33,10 @@ find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+ generate_messages(
+   DEPENDENCIES
+   std_msgs
+ )
 
 ###################################
 ## catkin specific configuration ##
@@ -51,7 +50,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES waffles_ros
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+   CATKIN_DEPENDS roscpp rospy std_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -83,5 +82,6 @@ FIND_LIBRARY(WAFFLES_LIBRARY GClasses /home/andywolff/waffles/lib/GClasses.a)
  target_link_libraries(whackamole_learning_node
    ${catkin_LIBRARIES}
    ${WAFFLES_LIBRARY}
+   mysqlclient
  )
 
